@@ -1,0 +1,27 @@
+service: serverless-framework-2-lambda
+frameworkVersion: '3'
+
+provider:
+  name: aws
+  runtime: nodejs18.x
+
+functions:
+  simulandoUploadDoCsv:
+    handler: index.simulandoUploadDoCsv
+    events:
+      - httpApi:
+          path: /alunos/batch
+          method: post
+
+  cadastrarAlunos:
+    handler: index.cadastrarAlunos
+    events:
+      - s3:
+          bucket: alunos-csv-local
+          event: s3:ObjectCreated:*
+          rules:
+            - suffix: .csv
+
+plugins:
+  - serverless-offline
+  - serverless-s3-local
