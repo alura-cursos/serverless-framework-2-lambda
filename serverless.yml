@@ -7,14 +7,14 @@ provider:
 
 functions:
   simulandoUploadDoCsv:
-    handler: index.simulandoUploadDoCsv
+    handler: cadastro_batch/local/index.simulandoUploadDoCsv
     events:
       - httpApi:
           path: /alunos/batch
           method: post
 
   cadastrarAlunos:
-    handler: index.cadastrarAlunos
+    handler: cadastro_batch/local/index.cadastrarAlunos
     events:
       - s3:
           bucket: alunos-csv-local
