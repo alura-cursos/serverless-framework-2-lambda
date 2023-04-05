@@ -1,3 +1,5 @@
+org: antonioevaldo
+app: serverless-framework-2-lambda
 service: serverless-framework-2-lambda
 frameworkVersion: '3'
 
@@ -29,6 +31,7 @@ functions:
       - httpApi:
           path: /alunos/batch
           method: post
+    enabled: false
 
   cadastrarAlunosDoBucketLocal:
     handler: cadastro_batch/local/index.cadastrarAlunosDoBucketLocal
@@ -38,7 +41,9 @@ functions:
           event: s3:ObjectCreated:*
           rules:
             - suffix: .csv
+    enabled: false
 
 plugins:
   - serverless-offline
   - serverless-s3-local
+  - serverless-disable-functions
